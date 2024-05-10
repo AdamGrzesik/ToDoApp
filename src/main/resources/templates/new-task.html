@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <title>New task</title>
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-1">
+            <p><a class="btn btn-danger" href="/">
+                <i class="bi bi-arrow-left-square-fill"></i> Back </a>
+            </p>
+        </div>
+        <div class="col-6">
+            <h2>Add a new task</h2>
+            <form action="#" th:action="@{/add/task}" th:object="${task}" method="POST">
+                <div class="form-group">
+                    <label for="description"></label>
+                    <input class="form-control mt-3 mb-3"
+                           type="text"
+                           th:field="*{description}"
+                           id="description"
+                           placeholder="Description"
+                    >
+
+                    <button type="submit" class="btn btn-outline-success">
+                        <i class="bi bi-plus-square-fill"></i> Add a task
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

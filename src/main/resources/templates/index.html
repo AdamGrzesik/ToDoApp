@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <title>Home Page</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-3">Simple ToDo Kotlin WebApp</h1>
+    <hr/>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+        <tr>
+            <th>Actions</th>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Is Complete</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${Tasks}" th:class="${item.isComplete} ? 'alert alert-success' : 'alert alert-warning'">
+            <td>
+                <div class="btn btn-group-sm" role="group">
+                    <a class="btn btn-info" th:href="@{/edit/task/{id}(id=${item.id})}">
+                        <i class="bi bi-pencil-fill"></i> Edit</a>
+                    <a class="btn btn-danger" th:href="@{/delete/task/{id}(id=${item.id})}">
+                        <i class="bi bi-trash-fill"></i> Delete</a>
+                </div>
+            </td>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.description}"></td>
+            <td>
+                <span th:if="${item.isComplete} == true" th:text="Yes"></span>
+                <span th:unless="${item.isComplete} == true" th:text="No"></span>
+            </td>
+            <td th:text="${#dates.format(item.createdAt, 'HH:mm dd/MM/yyyy')}"></td>
+            <td th:text="${#dates.format(item.updatedAt, 'HH:mm dd/MM/yyyy')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><a class="btn btn-outline-success" href="/add/task">
+        <i class="bi bi-plus-square-fill"></i> Add a task</a>
+    </p>
+
+    <div class="mt-4" style="opacity: 0.6;">
+        <h4> Did You Know? </h4>
+        <h5 th:text="${FunFact}"></h5>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

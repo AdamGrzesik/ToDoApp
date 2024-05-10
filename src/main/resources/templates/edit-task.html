@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <title>Edit task</title>
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-1">
+            <p><a class="btn btn-danger" href="/">
+                <i class="bi bi-arrow-left-square-fill"></i> Back </a>
+            </p>
+        </div>
+        <div class="col-6">
+            <h2>Edit task</h2>
+            <form class="row g-3" action="#" th:action="@{/edit/task/{id}/complete(id=${task.id})}" th:object="${task}"
+                  method="POST">
+                <div class="form-group">
+                    <div class="col-6">
+                        <label for="description">Description</label>
+                        <input class="form-control mt-3 mb-2"
+                               type="text"
+                               th:field="*{description}"
+                               id="description"
+                               placeholder="Description"
+                        >
+                    </div>
+                    <div class="col-6 form-check mb-3">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               id="inputIsComplete"
+                               th:field="*{isComplete}"
+                               th:checked="${isComplete} == true">
+                        <label class="form-check-label" for="inputIsComplete">
+                            Completed?
+                        </label>
+                    </div>
+
+                    <input type="hidden" th:field="*{createdAt}"
+                           th:value="${#dates.format(task.createdAt, 'HH:mm dd/MM/yyyy')}"/>
+                    <input type="hidden" th:field="*{updatedAt}"/>
+
+                    <button type="submit" class="btn btn-outline-success"
+                            th:value="${#dates.format(task.updatedAt, 'HH:mm dd/MM/yyyy')}">
+                        <i class="bi bi-plus-square-fill"></i> Update
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
